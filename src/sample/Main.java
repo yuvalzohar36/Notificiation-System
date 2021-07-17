@@ -107,7 +107,8 @@ public class Main extends Application {
             // Get the Session object.// and pass username and password
             Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("yuvalzohar36@gmail.com", "*********");
+                    return new PasswordAuthentication("yuvalzohar36@gmail.com", "nveurvtjh123");
+
                 }
             });
             // Used to debug SMTP issues
