@@ -39,55 +39,58 @@ public class Main extends Application {
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(10));
         vbox.setSpacing(8);
-        mainInst.handleTitle(vbox,"Calander");
-        LocalDate date = mainInst.handleDatePicker(vbox,"Choose date");
-        String ans = mainInst.handleTextArea(vbox);
-
-        System.out.println("NOW");
-        System.out.println(ans);
+        mainInst.handleTitle(vbox,"Calendar");
+        DatePicker datePicker = mainInst.handleDatePicker(vbox,"Choose date");
+        TextArea textArea = mainInst.handleTextArea(vbox);
+        Button SentButton = mainInst.handleSentButton(vbox);
         Scene scene = new Scene(vbox, 500, 500);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Calander");
+        primaryStage.setTitle("Calendar");
         primaryStage.show();
-        if(ans.equals("Yes"))
-            mainInst.SendEmail(date,ans);
-
+        SentButton.setOnAction(action -> {
+            String date;
+            if(datePicker.getValue()==null)
+                date = "Not inserted";
+            else
+                date = datePicker.getValue().toString();
+            String text = textArea.getText();
+            text = "Date: " +date+" \n"+text;
+            textArea.setText("Sent !");
+            mainInst.SendEmail(date,text);
+        });
     }
+
     public void handleTitle(VBox vbox, String title_text){
-        Text title = new Text("Calander");
+        Text title = new Text("Calendar");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-
         vbox.getChildren().add(title);
-
     }
-    public String handleTextArea(VBox vbox){
+    public TextArea handleTextArea(VBox vbox){
         TextArea textArea = new TextArea();
-
         vbox.getChildren().add(textArea);
+        return textArea;
+    }
+
+    public Button handleSentButton(VBox vbox){
         Button SentButton = new Button("Click to get text");
         SentButton.setMinWidth(50);
         vbox.getChildren().add(SentButton);
-        SentButton.setOnAction(action -> {
-            System.out.println(textArea.getText());
-            textArea.setText("Clicked!");
-            //ans[0] = textArea.getText();
-            //ans[1] = "Yes";
-        });
-        return "char";
+        return SentButton;
     }
-    public LocalDate handleDatePicker(VBox vbox, String textPickerHeader){
+
+    public DatePicker handleDatePicker(VBox vbox, String textPickerHeader){
         Label label = new Label(textPickerHeader);
         vbox.getChildren().add(label);
         DatePicker datePicker = new DatePicker();
         System.out.println(datePicker);
         HBox hbox = new HBox(datePicker);
         vbox.getChildren().add(hbox);
-        return datePicker.getValue();
+        return datePicker;
     }
 
 
-    public void SendEmail(LocalDate date, String text){
+    public void SendEmail(String date, String text){
             // Mention the Recipient's email address
             String to = "yuvalzohar36@gmail.com";
             // Mention the Sender's email address
@@ -104,7 +107,7 @@ public class Main extends Application {
             // Get the Session object.// and pass username and password
             Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("yuvalzohar36@gmail.com", "nveurvtjh123");
+                    return new PasswordAuthentication("yuvalzohar36@gmail.com", "*********");
                 }
             });
             // Used to debug SMTP issues
