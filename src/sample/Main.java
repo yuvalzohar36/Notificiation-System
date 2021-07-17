@@ -2,9 +2,7 @@ package sample;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-
 import javafx.scene.control.TextArea;
-import java.time.LocalDate;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,29 +11,17 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.text.Font;
-import jdk.jfr.Event;
-import java.util.*;
 import javax.mail.*;
-//package com.journaldev.mail;
-
 import java.util.Properties;
-
-import javax.mail.Session;
-
-
-import java.util.Properties;
-
 import javax.mail.Session;
 import javax.mail.internet.*;
-//import javax.activation.*;
+import javax.activation.*;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Main mainInst = new Main();
-
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         VBox vbox = new VBox();
         vbox.setPadding(new Insets(10));
         vbox.setSpacing(8);
@@ -66,6 +52,7 @@ public class Main extends Application {
         title.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         vbox.getChildren().add(title);
     }
+
     public TextArea handleTextArea(VBox vbox){
         TextArea textArea = new TextArea();
         vbox.getChildren().add(textArea);
@@ -88,7 +75,6 @@ public class Main extends Application {
         vbox.getChildren().add(hbox);
         return datePicker;
     }
-
 
     public void SendEmail(String date, String text){
             // Mention the Recipient's email address
@@ -134,9 +120,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
         launch(args);
     }
-
 }
 
